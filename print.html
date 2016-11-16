@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>打印</title>
+  <style media="print">
+    .noprint{visibility:hidden; height: 0}  /* 这是不打印的样式类 */
+    .printnextpage{page-break-before:always}   /* 这是分页的样式类 */
+  </style>
+  <style>
+    *{
+      padding:0;
+      margin:0;
+    }
+    .order-print table{
+      padding:0;
+      border-collapse: collapse;
+      position: relative;
+      margin-left: 20px;
+      width: 940px;
+      
+    }
+    tr{
+      border-bottom:1px solid #000;
+      border-left:1px solid #000;
+      height:6mm;
+      line-height: 6mm;
+    }
+    th,td{
+      border-right:1px solid #000; 
+      text-align: center; 
+      padding:0.5mm;
+      font-family: "微软雅黑";
+      /*font-family: "华文细黑";*/
+    }
+    th{
+      font-size: 12pt;
+      font-weight:normal;
+    }
+    td{
+      font-size: 14pt;
+    }
+    td.textl{
+      text-align: left;
+    }
+    tr.noborder{
+      border:none;
+    }
+    tr.noborder td{
+      font-size:12pt;
+      border:none;
+      text-align: left;
+    }
+    tr.table-title td{
+      text-align: center;
+      font-size: 18pt;
+      padding-bottom:3mm;
+    }
+    tr.mt15 td{
+      padding-top:16mm;
+    }
+    tr.paper-num{
+      position: absolute;
+      right:0;
+      top:0;
+      padding:2mm;
+      border:1px solid #000;
+    }
+    tr.paper-num td{
+      font-size: 14pt;
+      border:none;
+    }
+    tr.top15{
+      top:16mm
+    }
+    tr.datas{
+      border-left:none;
+      padding-bottom: 1mm;
+    }
+    tr.datas td{
+      border-right:none;
+      text-align: left;
+    }
+    tr.datas td{
+      font-size: 12pt;
+      padding-bottom: 0.5mm;
+    }
+    tr.sum td{
+      font-size: 14pt;
+    }
+    tr.lasttr{
+      padding-top:1mm;
+    }
+    td span{
+      display: inline-block;
+      width: 50mm;
+    }
+  </style>
+</head>
+<body>
+  <!--网页打印总结：
+          1.需要打印的部分都要采用表格布局，否则在针式打印机下字体不清楚
+          2.不需要打印的地方，采用类noprint
+          3.不要给需要打印的区域的body或外层元素设置margin或者padding，会增加页面的打印边距
+          4.分页用带类名printnextpage的标签隔出不同页
+          5.字体，宋体在谷歌下有些不清楚，建议“微软雅黑”，“华文细黑”
+          6.打印网页的单位采用cm,mm。字体采用pt
+          7.设置表格宽度，不要自适应
+          8.若需要打印的网页在iframe中，将在ie下打印出来的字体很小，这个时候需要用js判断：如果是ie浏览器，采用的打印命令window.document.execCommand('print', false, null)，其他浏览器，采用打印命令window.print();
+          9.ie浏览器需要设置浏览器的边距，并在“控制面板-硬件和声音-设备和打印机-选择目标打印机-选择打印机服务属性-单独创建页面尺寸”
+        
+   -->
+    <div id="identify" identify="order" class="page order pannel-static">
+      <div class="page-wrap scrollable order-print">
+        <div class="btn-box noprint">
+          <input type="button" value="打印" class="print-btn btn-primary" id="J_printe">
+        </div>
+        <table>
+        	<tr class="noborder paper-num">
+        		<td colspan="6">粮人网打印号&nbsp;&nbsp;&nbsp;001</td>
+        	</tr>
+        	<tr class="noborder table-title">
+        		<td colspan="6">国贤粮油1号店</td>
+        	</tr>
+        	<tr class="datas">
+        		<td colspan="6">订单编号：11100023770&nbsp;&nbsp;&nbsp;下单时间：2016-03-29 10:40&nbsp;&nbsp;&nbsp;商家电话：12345678909</td>
+        	</tr>
+            <tr>
+              <th class="col1">序号</th>
+              <th class="col2">商品名称</th>
+              <th class="col3">包装</th>
+              <th class="col4">成交单价</th>
+              <th class="col5">数量</th>
+              <th class="col6">商品总价</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td class="textl">五得利三星富强面粉五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>10000000.00</td>
+            </tr>
+            <tr class="noborder">
+            	<td style="text-align:right;" colspan="6">订单总额：2500000.00元&nbsp;&nbsp;&nbsp;优惠券：50元&nbsp;&nbsp;&nbsp;在线支付：2990000.00元</td>
+            </tr>
+            <tr class="noborder">
+            	<td colspan="6">收货人信息</td>
+            </tr>
+            <tr class="noborder">
+            	<td colspan="6">收货人：成不&nbsp;&nbsp;&nbsp;收货人电话：15590039948&nbsp;&nbsp;&nbsp;地址：北京市 朝阳区 朝阳区新东郊商城C区9003号</td>
+            </tr>
+            <tr class="noborder">
+            	<td colspan="6">备注：尽快配送！</td>
+            </tr>
+            <tr class="noborder">
+            	<td colspan="6">发货人：&nbsp;&nbsp;&nbsp;日期：&nbsp;&nbsp;&nbsp;收货人：&nbsp;&nbsp;&nbsp;日期：&nbsp;&nbsp;&nbsp;备注：</td>
+            </tr>
+        </table>
+        <p class="printnextpage"></p>
+        <table>
+          <tr class="noborder paper-num">
+            <td colspan="6">粮人网打印号&nbsp;&nbsp;&nbsp;001</td>
+          </tr>
+          <tr class="noborder table-title">
+            <td colspan="6">国贤粮油1号店</td>
+          </tr>
+          <tr class="datas">
+            <td colspan="6">订单编号：11100023770&nbsp;&nbsp;&nbsp;下单时间：2016-03-29 10:40&nbsp;&nbsp;&nbsp;商家电话：12345678909</td>
+          </tr>
+            <tr>
+              <th class="col1">序号</th>
+              <th class="col2">商品名称</th>
+              <th class="col3">包装</th>
+              <th class="col4">成交单价</th>
+              <th class="col5">数量</th>
+              <th class="col6">商品总价</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td class="textl">五得利三星富强面粉五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>1000000.00</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="textl">五得利三星富强面粉 25kg</td>
+              <td>袋</td>
+              <td>1000.00</td>
+              <td>1000</td>
+              <td>10000000.00</td>
+            </tr>
+            <tr class="noborder">
+              <td style="text-align:right;" colspan="6">订单总额：2500000.00元&nbsp;&nbsp;&nbsp;优惠券：50元&nbsp;&nbsp;&nbsp;在线支付：2990000.00元</td>
+            </tr>
+            <tr class="noborder">
+              <td colspan="6">收货人信息</td>
+            </tr>
+            <tr class="noborder">
+              <td colspan="6">收货人：成不&nbsp;&nbsp;&nbsp;收货人电话：15590039948&nbsp;&nbsp;&nbsp;地址：北京市 朝阳区 朝阳区新东郊商城C区9003号</td>
+            </tr>
+            <tr class="noborder">
+              <td colspan="6">备注：尽快配送！</td>
+            </tr>
+            <tr class="noborder">
+              <td colspan="6">发货人：&nbsp;&nbsp;&nbsp;日期：&nbsp;&nbsp;&nbsp;收货人：&nbsp;&nbsp;&nbsp;日期：&nbsp;&nbsp;&nbsp;备注：</td>
+            </tr>
+        </table>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+      var container=$(".order-print");
+      printOrder(container);
+      function printOrder(container){
+        var hkey_root, hkey_path, hkey_key;
+            hkey_root = "HKEY_CURRENT_USER";
+            hkey_path = "\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+         
+        //设置网页打印的页眉页脚为空
+        function pagesetup_null() {
+            try {
+                var RegWsh = new ActiveXObject("WScript.Shell");
+                hkey_key = "header";
+                RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+                hkey_key = "footer";
+                RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+            } catch (e) {
+            }
+        }
+        //-----判断浏览器--------start
+        function getBrowserNV(){
+         var agent = navigator.userAgent.toLowerCase();
+         var regStr_ie = /msie [\d.]+/gi ;
+         var regStr_ff = /firefox\/[\d.]+/gi
+         var regStr_chrome = /chrome\/[\d.]+/gi ;
+         var regStr_saf = /safari\/[\d.]+/gi ;
+         var browserNV = "";
+         //IE
+         if(agent.indexOf("msie") > 0){
+           browserNV = agent.match(regStr_ie) ;
+         }
+         //firefox
+         if(agent.indexOf("firefox") > 0){
+           browserNV = agent.match(regStr_ff) ;
+         }
+         //Chrome
+         if(agent.indexOf("chrome") > 0){
+           browserNV = agent.match(regStr_chrome) ;
+         }
+         //Safari
+         if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0){
+           browserNV = agent.match(regStr_saf) ;
+         }
+         browserNV = browserNV.toString();
+         //other
+         if(""==browserNV){
+           browserNV  = "Is not a standard browser";
+         }
+         //Here does not display "/"
+         if(browserNV.indexOf('firefox')!= -1 || browserNV.indexOf('chrome')!= -1){
+           browserNV = browserNV.replace("/","");
+         }
+         //Here does not display space
+         if(browserNV.indexOf('msie')!= -1){
+          //msie replace IE & trim space
+          browserNV = browserNV.replace("msie","ie").replace(/\s/g,"");
+         }
+         if(browserNV == "Is not a standard browser"){
+           if(isIE()){
+             browserNV = "ie11.0";
+           }
+         }
+             //return eg:ie9.0 firefox34.0 chrome37.0
+            return browserNV;
+        }
+        //IE11
+        function isIE() { //IE
+            if (!!window.ActiveXObject || "ActiveXObject" in window)
+                return true;
+            else
+                return false;
+        }
+        //-----判断浏览器--------end!
+        container.find("#J_printe").on("click",function(){
+              pagesetup_null();
+              var bnv = getBrowserNV().toString();
+              if(bnv.indexOf("ie") != -1){
+                    //如果是ie浏览器
+                    window.document.execCommand('print', false, null);
+              }else{
+                    window.print();
+              }
+        });
+      }
+    </script>
+</body>
+</html>
